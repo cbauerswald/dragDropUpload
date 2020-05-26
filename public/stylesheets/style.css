@@ -1,3 +1,8 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #484848;
+}
+
 .box__dragndrop,
 .box__uploading,
 .box__success,
@@ -15,8 +20,12 @@
   z-index: 10;
 }
 .box__input {
-  padding:2em;
-  margin:2em;
+  display: block;
+  padding-top: 4em;
+  text-align: center;
+}
+
+.box {
   text-align: center;
 }
 
@@ -43,4 +52,10 @@
 }
 .box.is-uploading .box__uploading {
   display: block;
+}
+
+.box.is-success .box__success {
+  display: block;
+  padding-top:2em;
+  size: 70;
 }

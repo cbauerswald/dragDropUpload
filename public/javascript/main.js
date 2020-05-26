@@ -13,7 +13,6 @@ $(document).ready(function() {
 
   function submitForm(e) {
     if ($form.hasClass('is-uploading')) {
-      console.log("is uploading so returned false");
       return false;
     }
 
@@ -34,8 +33,6 @@ $(document).ready(function() {
     if (droppedFiles) {
       $.each( droppedFiles, function(i, file) {
         ajaxData.append( $input.attr('name')+i, file );
-        console.log("file is : ");
-        console.log(file);
       });
     }
 
