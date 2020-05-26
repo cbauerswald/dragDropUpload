@@ -1,5 +1,19 @@
-p #{name}'s fun page!
-form(action='fileupload', method='post', enctype='multipart/form-data')
-	input(name='text-test', type='text')
-	input(name="file", type="file")
-	input(type='submit')
+extends layout
+
+block content
+  h1 Student Data Upload
+  form.box(method='post' action='/fileupload' enctype='multipart/form-data')
+    .box__input
+      input#file.box__file(type='file' name='files[]' data-multiple-caption='{count} files selected' multiple='')
+      label(for='file')
+        span
+          strong Choose a file
+        span.box__dragndrop  or drag it here
+        | .
+      button.box__button(type='submit') Upload
+    .box__uploading Uploading&mldr;
+    .box__success Done!
+    .box__error
+      | Error! 
+      span.error__message
+      | .

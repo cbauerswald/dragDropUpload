@@ -6,6 +6,9 @@ var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+//set up static directory
+app.use(express.static('public'));
+
 //routers
 var indexRouter = require('./routes/indexRouter.js');
 var uploadRouter = require('./routes/uploadRouter.js');

@@ -1,0 +1,46 @@
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__button,
+.box__error {
+  display: none;
+}
+
+.box__file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 10;
+}
+.box__input {
+  padding:2em;
+  margin:2em;
+  text-align: center;
+}
+
+.box__input label span :hover {
+  color:blue;
+}
+
+.box.has-advanced-upload {
+  background-color: white;
+  outline: 2px dashed #92b0b3;
+  outline-offset: -10px;
+  height: 20em;
+  width:20em;
+}
+.box.has-advanced-upload .box__dragndrop {
+  display: inline;
+}
+.box.is-dragover {
+  background-color: grey;
+}
+
+.box.is-uploading .box__input {
+  visibility: none;
+}
+.box.is-uploading .box__uploading {
+  display: block;
+}
