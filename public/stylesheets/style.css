@@ -3,6 +3,10 @@ body {
   color: #484848;
 }
 
+.wrapper {
+  text-align: center;
+}
+
 .box__dragndrop,
 .box__uploading,
 .box__success,
@@ -23,14 +27,16 @@ body {
   display: block;
   padding-top: 4em;
   text-align: center;
+  font-size: 175%;
 }
 
 .box {
   text-align: center;
+  display: inline-block;
 }
 
 .box__input label span :hover {
-  color:blue;
+  color:lightblue;
 }
 
 .box.has-advanced-upload {
@@ -38,7 +44,8 @@ body {
   outline: 2px dashed #92b0b3;
   outline-offset: -10px;
   height: 20em;
-  width:20em;
+  width: 50%;
+  min-width: 25em;
 }
 .box.has-advanced-upload .box__dragndrop {
   display: inline;
@@ -56,13 +63,13 @@ body {
 
 .box.is-success .box__success {
   display: block;
-  padding-top:2em;
-  size: 70;
+  padding:2em;
+  font-size: 100%;
 }
 
 .box.is-success .box__success .fileCount{
   color: lightblue;
   font-size: 200%;
   font-weight: 600;
-  padding: 0.7em;
+  padding-bottom: 0.4em;
 }
