@@ -59,3 +59,10 @@ body {
   padding-top:2em;
   size: 70;
 }
+
+.box.is-success .box__success .fileCount{
+  color: lightblue;
+  font-size: 200%;
+  font-weight: 600;
+  padding: 0.7em;
+}

@@ -13,16 +13,27 @@ router.post('/', function(req, res, next) {
   //create a formidable object that will upload to our desired directory
   const form = formidable({multiples: true, uploadDir: path.dirname(__dirname) + "/uploads"});
   
-  //parse out and sace the information contained in the request
+  //parse out and save the information contained in the request
   form.parse(req, (err, fields, files) => {
     if (err) {
       next(err);
       return;
     }
-    for (key in files) {
-      renameFile(files[key], next);
+
+    var numFiles = 0; 
+    //files[0] is either a single file or an array containing all uploaded files
+    if (files["files[]"].length > 0) {
+      numFiles = files["files[]"].length;
+      //if there are multiple files
+      for (i in files["files[]"]) {
+        renameFile(files["files[]"][i], next);
+      }
+    } else {
+      numFiles = 1;
+      //if there is only one file
+      renameFile(files["files[]"], next);
     }
-    res.json({success: true});
+    res.json({success: true, fileCount: numFiles});
   }); 
 });
 

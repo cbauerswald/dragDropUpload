@@ -34,11 +34,13 @@ $(document).ready(function() {
       $form.trigger('submit');
     });
 
-  } else {
-    $input.on('change', function(e) { // when drag & drop is NOT supported
-      $form.trigger('submit');
-    });
   }
+  
+  $input.on('change', function(e) { // when user does traditional file upload
+    droppedFiles = this.files;
+    $form.trigger('submit');
+  });
+  
 
   function submitForm(e) {
     //prevent multiple uploads
@@ -82,6 +84,7 @@ $(document).ready(function() {
       },
       success: function(data) {
         $form.addClass( data.success == true ? 'is-success' : 'is-error' );
+        $form.find('.box__success .fileCount').html(data.fileCount + " "); 
         // if there is an error, display it to the user
         if (!data.success) $errorMsg.text(data.error);
       },
