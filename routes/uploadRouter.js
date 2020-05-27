@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var formidable = require('formidable');
 var path = require('path');
+var fs = require('fs');
 
 
 router.post('/', function(req, res, next) {
@@ -12,7 +13,10 @@ router.post('/', function(req, res, next) {
       next(err);
       return;
     }
-    res.json({fields, files, success: true});
+    for (f in files) {
+      fs.rename(files[f].path, files[f].path + "_" + files[f].name, (error) => next(error));
+    }
+    res.json({success: true});
   }); 
 });
 
