@@ -1,6 +1,7 @@
-var express = require('express');
-var app = express();
-var path = require('path');
+const express = require('express');
+const app = express();
+const path = require('path');
+
 
 //set up views
 app.set('views', path.join(__dirname, 'views'));

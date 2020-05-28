@@ -3,9 +3,21 @@ var router = express.Router();
 var formidable = require('formidable');
 var path = require('path');
 var fs = require('fs');
+const {spawn} = require('child_process');
 
 function renameFile(f, next) {
   fs.rename(f.path, f.path + "_" + f.name, (error) => next(error));
+}
+
+function parseFiles(files) {
+    // Spawn new child process to call the python script
+    // Send files object as string to python parser script.
+    const python = spawn('python', ['parser.py', JSON.stringify(files)]);
+
+    // Ensure python process is finished (gives code 0 if success).
+    python.on('close', (code) => {
+      console.log(`child process close all stdio with code ${code}`);
+    })
 }
 
 router.post('/', function(req, res, next) {
@@ -33,6 +45,10 @@ router.post('/', function(req, res, next) {
       //if there is only one file
       renameFile(files["files[]"], next);
     }
+
+    // Launches python script.
+    parseFiles(files);
+
     res.json({success: true, fileCount: numFiles});
   }); 
 });
