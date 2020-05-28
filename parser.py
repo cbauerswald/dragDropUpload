@@ -16,11 +16,17 @@ if __name__ == "__main__":
     for file in os.listdir(base):
         path = Path(os.path.join(base, file))
         if '.csv' in path:
-            name = path.name.split('_')[2].split('.')[0].replace(' ','_').lower()
+            name = path.name.split('_')[2].split('.')[0].replace(' ','_')
             now = str(datetime.now().date()).replace('-','_')
             name += f'_DATE_{now}'
 
-            df = pd.read_csv(path)
-            df.columns = [column.replace(' ', '_').lower() for column in df.columns]
-            df.to_sql(name, con, if_exists='replace')
+            try:
+                df = pd.read_csv(path)
+                df.columns = [column.replace(' ', '_').lower() for column in df.columns]
+                df.to_sql(name, con, if_exists='replace')
+            except:
+                path = file['path'] + '_' + name
+                df = pd.read_csv(path)
+                df.columns = [column.replace(' ', '_').lower() for column in df.columns]
+                df.to_sql(name, con, if_exists='replace')
         os.remove(path)
