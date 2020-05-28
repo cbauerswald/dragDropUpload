@@ -17,4 +17,5 @@ var uploadRouter = require('./routes/uploadRouter.js');
 app.use('/', indexRouter);
 app.use('/fileupload', uploadRouter);
 
-app.listen(3000);
+console.log('Server is listening on port 5000')
+app.listen(5000);

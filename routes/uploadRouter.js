@@ -12,7 +12,7 @@ function renameFile(f, next) {
 function parseFiles(files) {
     // Spawn new child process to call the python script
     // Send files object as string to python parser script.
-    const python = spawn('python', ['parser.py', JSON.stringify(files)]);
+    const python = spawn('python3', ['parser.py', JSON.stringify(files)]);
 
     // Ensure python process is finished (gives code 0 if success).
     python.on('close', (code) => {
