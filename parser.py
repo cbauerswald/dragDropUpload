@@ -11,22 +11,26 @@ import os
 if __name__ == "__main__":
 
     con = sqlite3.connect('tests.db')
+    files = json.loads(sys.argv[1])['files[]']
 
-    base = './uploads'
-    for file in os.listdir(base):
-        path = Path(os.path.join(base, file))
-        if '.csv' in path:
-            name = path.name.split('_')[2].split('.')[0].replace(' ','_')
-            now = str(datetime.now().date()).replace('-','_')
-            name += f'_DATE_{now}'
+    with open('jinput.json', 'w+') as f:
+        f.write(json.dumps(files))
 
-            try:
-                df = pd.read_csv(path)
-                df.columns = [column.replace(' ', '_').lower() for column in df.columns]
-                df.to_sql(name, con, if_exists='replace')
-            except:
-                path = file['path'] + '_' + name
-                df = pd.read_csv(path)
-                df.columns = [column.replace(' ', '_').lower() for column in df.columns]
-                df.to_sql(name, con, if_exists='replace')
+    for file in files:
+        path = file['path']
+        name = file['name']
+        name_clean = name.split('.')[0].replace(' ', '_').lower()
+        now = str(datetime.now().date()).replace('-', '_')
+        name_parsed = name_clean + f'_DATE_{now}'
+
+        '''with open(f'{name_parsed}.txt', 'w+') as f:
+            f.write(path)
+            f.write('\n')
+            f.write(name_parsed)
+        '''
+
+        df = pd.read_csv(path)
+        df.columns = [column.replace(' ', '_').lower() for column in df.columns]
+        df.to_sql(name_parsed, con, if_exists='replace')
+
         os.remove(path)
