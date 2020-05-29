@@ -13,6 +13,9 @@ if __name__ == "__main__":
     con = sqlite3.connect('tests.db')
     files = json.loads(sys.argv[1])['files[]']
 
+    if not type(files) == list:
+        files = [files]
+
     with open('jinput.json', 'w+') as f:
         f.write(json.dumps(files))
 
@@ -22,12 +25,6 @@ if __name__ == "__main__":
         name_clean = name.split('.')[0].replace(' ', '_').lower()
         now = str(datetime.now().date()).replace('-', '_')
         name_parsed = name_clean + f'_DATE_{now}'
-
-        '''with open(f'{name_parsed}.txt', 'w+') as f:
-            f.write(path)
-            f.write('\n')
-            f.write(name_parsed)
-        '''
 
         df = pd.read_csv(path)
         df.columns = [column.replace(' ', '_').lower() for column in df.columns]
