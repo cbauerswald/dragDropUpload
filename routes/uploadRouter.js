@@ -5,9 +5,11 @@ var path = require('path');
 var fs = require('fs');
 const {spawn} = require('child_process');
 
+/*
 function renameFile(f, next) {
   fs.rename(f.path, f.path + "_" + f.name, (error) => next(error));
 }
+*/
 
 function parseFiles(files) {
     // Spawn new child process to call the python script
@@ -36,14 +38,8 @@ router.post('/', function(req, res, next) {
     //files[0] is either a single file or an array containing all uploaded files
     if (files["files[]"].length > 0) {
       numFiles = files["files[]"].length;
-      //if there are multiple files
-      for (i in files["files[]"]) {
-        renameFile(files["files[]"][i], next);
-      }
     } else {
       numFiles = 1;
-      //if there is only one file
-      renameFile(files["files[]"], next);
     }
 
     // Launches python script.
