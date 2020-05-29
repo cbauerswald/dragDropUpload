@@ -1,3 +1,4 @@
 node-modules
 uploads
+tests.db
 .DS_store
