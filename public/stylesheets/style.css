@@ -7,6 +7,18 @@ body {
   text-align: center;
 }
 
+select {
+  width: 10em;
+  background: lightblue;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  padding: 0.5em 1em 0.5em 1em ;
+  color: white;
+  font-size: 100%;
+}
+
+
 .box__dragndrop,
 .box__uploading,
 .box__success,

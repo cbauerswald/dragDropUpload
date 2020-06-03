@@ -9,7 +9,8 @@ $(document).ready(function() {
   }();
 
   var $form = $('.box');
-  var $input = $form.find('input[type="file"]')
+  var $input = $form.find('input[type="file"]');
+  var $typeInput = $('.file_type_input').find('select');
   var $errorMsg = $form.find('span.error__message');
 
   // set up drag drop events and submit form on DROP
@@ -43,6 +44,11 @@ $(document).ready(function() {
   
 
   function submitForm(e) {
+    //prevent results from being uploaded with null test type
+    if ($typeInput.val() === null ) {
+      alert("You must choose a test type.");
+      return false;
+    }
     //prevent multiple uploads
     if ($form.hasClass('is-uploading')) {
       return false;
@@ -69,11 +75,12 @@ $(document).ready(function() {
       $.each( droppedFiles, function(i, file) {
         ajaxData.append( $input.attr('name'), file );
       });
+      ajaxData.append($typeInput.attr('name'), $typeInput.val());
     }
 
     $.ajax({
-      url: $form.attr('action'),
-      type: $form.attr('method'),
+      url:'/fileupload',
+      type: 'POST',
       data: ajaxData,
       dataType: 'json',
       cache: false,

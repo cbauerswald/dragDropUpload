@@ -3,7 +3,14 @@ extends layout
 block content
   .wrapper
     h1 Student Data Upload
-    form.box(method='post' action='/fileupload' enctype='multipart/form-data')
+    .file_type_input
+      select(name='test_type' id='test_type_select' form='upload_form' required='')
+        option(value='', disabled='', selected='') Select a test type
+        option(value="SAT") SAT
+        option(value="ACT") ACT
+        option(value=PSAT) PSAT
+        option(value="MCAT") MCAT
+    form.box(enctype='multipart/form-data' id='upload_form')
       .box__input
         input#file.box__file(type='file' name='files[]' data-multiple-caption='{count} files selected' multiple='')
         label(for='file')

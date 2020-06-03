@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
   
   //create a formidable object that will upload to our desired directory
   const form = formidable({multiples: true, uploadDir: path.dirname(__dirname) + "/uploads"});
-  
+
   //parse out and save the information contained in the request
   form.parse(req, (err, fields, files) => {
     if (err) {
